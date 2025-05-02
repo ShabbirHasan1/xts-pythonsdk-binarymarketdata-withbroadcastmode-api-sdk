@@ -137,8 +137,8 @@ class Touchline():
                 f"l:{low},"
                 f"c:{close},"
                 f"vp:{totalvaluetraded},"
-                f"ai:{askData["size"]}|{askData["rowprice"]}|{askData["totalOrders"]}|{askData["backmarketmakerflag"]}"
-                f"bi:{bidData["size"]}|{bidData["rowprice"]}|{bidData["totalOrders"]}|{bidData["backmarketmakerflag"]}"
+                f'ai:{askData['size']}|{askData['rowprice']}|{askData['totalOrders']}|{askData['backmarketmakerflag']}'
+                f'bi:{bidData['size']}|{bidData['rowprice']}|{bidData['totalOrders']}|{bidData['backmarketmakerflag']}'
             )
        
 
