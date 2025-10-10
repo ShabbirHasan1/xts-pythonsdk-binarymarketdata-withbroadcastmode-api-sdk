@@ -1,5 +1,6 @@
 
 import struct
+
 class MarketDeptRowInfo(): 
     size = 0
     rowprice = 0.0
@@ -10,8 +11,10 @@ class MarketDeptRowInfo():
         self.count = count
 
     def deserialize(self):
-        size = self.reader.read_int32()
-        self.count += 4
+        # size = self.reader.read_int32()
+        # self.count += 4
+        size = struct.unpack('q', self.reader.read_bytes(8))[0]
+        self.count += 8
         rowprice = struct.unpack('d', self.reader.read_bytes(8))[0]
         self.count += 8
         totalOrders =  self.reader.read_int32()
@@ -20,4 +23,3 @@ class MarketDeptRowInfo():
         self.count += 2
         return self.count, {"size":size,"rowprice":rowprice, "totalOrders":totalOrders, "backmarketmakerflag":backmarketmakerflag}
     
-

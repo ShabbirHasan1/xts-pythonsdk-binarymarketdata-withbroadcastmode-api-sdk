@@ -28,10 +28,9 @@ print("Login Response -->", response)
 set_marketDataToken = response['result']['token']
 set_muserID = response['result']['userID'] 
 
-Instruments = [ {'exchangeSegment':1, 'exchangeInstrumentID': 2885}]
+Instruments = [ {'exchangeSegment':2, 'exchangeInstrumentID': 52168}]
 subresponse = xt.send_subscription(Instruments, 1501)
 print("Subscribe Response -->", subresponse)
-
 
 class MDSocket_io(socketio.Client):
 

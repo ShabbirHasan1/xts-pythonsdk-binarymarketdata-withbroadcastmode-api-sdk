@@ -1,4 +1,5 @@
 from ApplicationMessageVersion import ApplicationMessageVersion
+import struct 
 
 class OpenInterest:
     @staticmethod
@@ -24,8 +25,10 @@ class OpenInterest:
         count += 8
         MarketType = reader.read_int16()
         count += 2
-        openInterest = reader.read_int32()
-        count += 4
+        # openInterest = reader.read_int32()
+        # count += 4
+        openInterest = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
         underlyingExchangeSegment = reader.read_int16()
         count += 2
         underlyingInstrumentID = reader.read_uint64()
@@ -33,12 +36,16 @@ class OpenInterest:
         isStringExits = reader.read_int8()
         count += 1
 
-        if isStringExits == 1:
+        if (isStringExits == 1) :
             stringLength = reader.read_int8()
-            count += 1 + stringLength  # Add the string's length to the count
+            count += 1
+            count += stringLength
 
-        underlyingTotalOpenInterest = reader.read_int32()
-        count += 4
+        # underlyingTotalOpenInterest = reader.read_int32()
+        # count += 4
+        underlyingTotalOpenInterest = struct.unpack('q', reader.read_bytes(8))[0]
+        underlyingTotalOpenInterest =reader.read_uint64()
+        count += 8
 
         if broadcastmode == "Full":
             return {

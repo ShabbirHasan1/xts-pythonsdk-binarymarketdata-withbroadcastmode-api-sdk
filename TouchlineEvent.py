@@ -38,19 +38,31 @@ class Touchline():
         LTP = struct.unpack('d', reader.read_bytes(8))[0]
         count += 8
 
-        ltq = reader.read_int32()
-        count += 4
+        # ltq = reader.read_int32()
+        # count += 4
 
-        totalBuyQuantity = reader.read_uint32()
-        count += 4
+        # totalBuyQuantity = reader.read_uint32()
+        # count += 4
 
-        totalSellQuantity = reader.read_uint32()
-        count += 4
+        # totalSellQuantity = reader.read_uint32()
+        # count += 4
 
-        totalTradedQuantity = reader.read_uint32()
-        count += 4
+        # totalTradedQuantity = reader.read_uint32()
+        # count += 4
+
+        ltq = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalBuyQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalSellQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalTradedQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
         averageTradedPrice = struct.unpack('d', reader.read_bytes(8))[0]
-
         count += 8
 
         lastTradedTime = reader.read_int64()
@@ -141,27 +153,3 @@ class Touchline():
                 f"bi:{bidData['size']}|{bidData['rowprice']}|{bidData['totalOrders']}|{bidData['backmarketmakerflag']}"
             )
        
-
-def convertTuple(tup):
-        str = ''.join(tup)
-        return str
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        
-
-
-
-def convertTuple(tup):
-    return ''.join(tup)

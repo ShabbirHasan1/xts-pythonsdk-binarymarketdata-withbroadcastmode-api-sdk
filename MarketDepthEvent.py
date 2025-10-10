@@ -45,16 +45,30 @@ class MarketDepthEvent():
         count = md1.deserialize()[0]
         lut = reader.read_uint64()
         count += 8
+        # LTP = struct.unpack('d', reader.read_bytes(8))[0]
+        # count += 8
+        # ltq = reader.read_int32()
+        # count += 4
+        # totalBuyQuantity = reader.read_uint32()
+        # count += 4
+        # totalSellQuantity = reader.read_uint32()
+        # count += 4
+        # totalTradedQuantity = reader.read_uint32()
+        # count += 4
         LTP = struct.unpack('d', reader.read_bytes(8))[0]
         count += 8
-        ltq = reader.read_int32()
-        count += 4
-        totalBuyQuantity = reader.read_uint32()
-        count += 4
-        totalSellQuantity = reader.read_uint32()
-        count += 4
-        totalTradedQuantity = reader.read_uint32()
-        count += 4
+
+        ltq = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalBuyQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalSellQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
+
+        totalTradedQuantity = struct.unpack('q', reader.read_bytes(8))[0]
+        count += 8
         averageTradedPrice = struct.unpack('d', reader.read_bytes(8))[0]
         count += 8
         lastTradedTime = reader.read_int64()
@@ -134,6 +148,4 @@ class MarketDepthEvent():
                 f"bi: {bidData[0]['size']}|{bidData[0]['rowprice']}|{bidData[0]['totalOrders']}|{bidData[0]['backmarketmakerflag']}|{bidData[1]['size']}|{bidData[1]['rowprice']}|{bidData[1]['totalOrders']}|{bidData[1]['backmarketmakerflag']}{bidData[2]['size']}|{bidData[2]['rowprice']}|{bidData[2]['totalOrders']}|{bidData[2]['backmarketmakerflag']}|{bidData[3]['size']}|{bidData[3]['rowprice']}|{bidData[3]['totalOrders']}|{bidData[3]['backmarketmakerflag']}|{bidData[4]['size']}|{bidData[4]['rowprice']}|{bidData[4]['totalOrders']}|{bidData[4]['backmarketmakerflag']}"
 
 )
-
-
 
